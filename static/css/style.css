@@ -1,0 +1,29 @@
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -100;
+}
+.container{
+background:#FFFFFF;
+max-width: 500px;
+border-radius:5%;
+margin-left: auto;
+margin-right: auto;
+}
+.mb-5{
+width:50%;
+margin-left: auto;
+margin-right: auto;
+}
+.btn{
+width:50%;
+margin-left: auto;
+margin-right: auto;
+}
+.d-flex{
+width:50%;
+margin-left: auto;
+margin-right: auto;
+}

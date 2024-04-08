@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}{{title}}}}{% endblock %}
+{% block content %}
+<section class="pt-16 pb-32">
+  <div class="container">
+    <div class="mw-md mx-auto text-center">
+      <a class="d-inline-block mb-32" href="#">
+        <img src="flaro-assets/logos/flaro-logo-black-xl.svg" alt="">
+      </a>
+      <h3 class="mb-4">Join for free</h3>
+      <p class="fs-8 text-secondary mb-12"></p>
+      <form action="">
+        <div class="mb-5">
+          <input class="form-control" type="text" placeholder="First & Last Name">
+        </div>
+        <div class="mb-5">
+          <input class="form-control" type="email" placeholder="Email address">
+        </div>
+        <div class="mb-5">
+          <input class="form-control" type="password" placeholder="Create Password">
+        </div>
+        <a class="btn w-50 mb-8 btn-primary shadow" href="#">Create Account</a>
+        <p class="d-flex flex-wrap align-items-center justify-content-center">
+          <span class="me-1">Already have an account?</span>
+          <a class="btn px-0 btn-link fw-bold" href="#">Login</a>
+        </p>
+      </form>
+    </div>
+  </div>
+  <video autoplay muted loop class="bg-video">
+  <source src="/static/video6.mp4" type="video/mp4">
+</video>
+</section>
+{% endblock %}

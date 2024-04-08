@@ -4,8 +4,8 @@ app = Flask(__name__, template_folder='templates')
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
-@app.route('/login')
-def login():
+@app.route('/register')
+def register():
     return render_template('login.html', title='')
 
 

@@ -5,12 +5,12 @@
   width: 100%;
   z-index: -100;
 }
-.container{
+.container-my{
+width:60%;
 background:#FFFFFF;
-max-width: 500px;
-border-radius:5%;
 margin-left: auto;
 margin-right: auto;
+border-radius:5%;
 }
 .mb-5{
 width:50%;

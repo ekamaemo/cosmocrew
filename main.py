@@ -1,9 +1,34 @@
 from flask import Flask, render_template, redirect
 from forms.register_form import RegisterForm
+from forms.login_form import LoginForm
 from create_database import create_database
 from users import Users as User
+from flask_login import LoginManager, login_user
 app = Flask(__name__, template_folder='templates')
+login_manager = LoginManager()
+login_manager.init_app(app)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    db = create_database(load_fake_data=False)
+    return db.query(User).get(user_id)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        db_sess = create_database(load_fake_data=False)
+        user = db_sess.query(User).filter(User.email == form.email.data).first()
+        if user and user.check_password(form.password.data):
+            login_user(user, remember=form.remember_me.data)
+            return redirect("/")
+        return render_template('login.html',
+                               message="Неправильный логин или пароль",
+                               form=form)
+    return render_template('login.html', title='Авторизация', form=form)
 
 
 @app.route('/register', methods=['GET', 'POST'])

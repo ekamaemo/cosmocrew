@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <div class="container-my">
+        <div class="mw-md mx-auto text-center">
+          <a class="d-inline-block mb-32" href="#">
+            <img src="flaro-assets/logos/flaro-logo-black-xl.svg" alt="">
+          </a>
+          <h3 class="mb-4">Sign in</h3>
+          <p class="fs-8 text-secondary mb-12"></p>
+          <form action="">
+            <div class="mb-5">
+                {{ form.email(class="form-control", type="email", placeholder="Email") }}
+                {% for error in form.email.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="mb-5">
+                {{ form.password(class="form-control", type="password", placeholder="Password") }}
+                {% for error in form.password.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+            <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+            <p class="btn">{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+            <div>{{ message }}</div>
+          </form>
+        </div>
+    </div>
+</form>
+<video autoplay muted loop class="bg-video">
+  <source src="/static/video6.mp4" type="video/mp4">
+</video>
+{% endblock %}

@@ -16,6 +16,11 @@ def load_user(user_id):
     return db.query(User).get(user_id)
 
 
+@app.route('/')
+def root():
+    return render_template("main_window.html", title="Главная")
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()

@@ -1,6 +1,4 @@
 from db_session import create_db, session
-import faker
-import random
 from users import Users
 from planets import Planets
 from news import News

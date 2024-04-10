@@ -26,7 +26,7 @@ function showSlider(type){
         thumbnailDom.appendChild(itemThumbnail[0]);
         carouselDom.classList.add('next');
     }else{
-        let positionLastItem = itemSlider.length - 1;
+        let positionLastItem = 7;
         listItemDom.prepend(itemSlider[positionLastItem]);
         thumbnailDom.prepend(itemThumbnail[positionLastItem]);
         carouselDom.classList.add('prev');

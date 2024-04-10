@@ -62,5 +62,10 @@ def reqister():
     return render_template('register.html', title='Регистрация', form=form)
 
 
+@app.route('/users_page/<id>')
+def users_page(id):
+    return render_template('users_page.html', id=id, avatar='ava.png', planet='mercury.jfif')
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1', debug=True)

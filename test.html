@@ -1,0 +1,63 @@
+<form name="quiz" class="quiz" id="quiz" action="javascript:check();">
+<h3> Как вы хотите добираться до своей планеты? </h3>
+<input name="vopros1" checked = "checked" value="MERCURY" id="value1" type="radio"> Надену скафандр и дойду <br>
+<input name="vopros1" value="3" id="EARTH" type="radio"> Пешком <br>
+<input name="vopros1" value="8" id="NEPTUN" type="radio"> На космическом корабле <br>
+<input name="vopros1" value="7" id="URANUS" type="radio"> Телепортацией <br>
+<h3> В какое время года вы родились? </h3>
+<input name="vopros2" checked = "checked" value="URANUS" id="value1" type="radio"> Зима <br>
+<input name="vopros2" value="MARS" id="value2" type="radio"> Весна <br>
+<input name="vopros2" value="VENUS" id="value3" type="radio"> Лето <br>
+<input name="vopros2" value="JUPITER" id="value4" type="radio"> Осень <br>
+<h3> Какая погода вам больше всего нравится? </h3>
+<input name="vopros3" checked = "checked" value="VENUS" id="value1" type="radio"> Солнечная и ветреная <br>
+<input name="vopros3" value="EARTH" id="value2" type="radio"> Прохладная и дождливая <br>
+<input name="vopros3" value="NEPTUN" id="value3" type="radio"> Морозная <br>
+<input name="vopros3" value="MERCURY" id="value4" type="radio"> Жаркая и безветренная <br>
+<h3> Сколько видов животных имеется на вашей планете? </h3>
+<input name="vopros4" checked = "checked" value="MERCURY" id="value1" type="radio"> 1 <br>
+<input name="vopros4" value="MARS" id="value2" type="radio"> 10 <br>
+<input name="vopros4" value="EARTH" id="value3" type="radio"> 100000000 <br>
+<input name="vopros4" value="SATURN" id="value4" type="radio"> 10000000000000000000000 <br>
+<h3> Какое первое действие вы совершите на вашей планете? </h3>
+<input name="vopros5" checked = "checked" value="MARS" id="value1" type="radio"> Прыгну <br>
+<input name="vopros5" value="JUPITER" id="value2" type="radio"> Побегу <br>
+<input name="vopros5" value="SATURN" id="value3" type="radio"> Буду стоять и смотреть на небо <br>
+<input name="vopros5" value="URANUS" id="value4" type="radio"> Покушаю, а потом погуляю <br>
+<br>
+<input value="submit" type="submit" id="submit">
+</form>
+<script>
+function check()
+ {
+ var one=0;
+ var two=0;
+ var three=0;
+ var four=0;
+ var five=0;
+ var six=0;
+ var seven=0;
+ var eight=0;
+ var result="";
+ var choice;
+ for (var v=1; v<=5; v++)
+ {
+ var question = document.forms["quiz"].elements["vopros"+v];
+  for (var i=0; i<q.length; i++)
+  {
+  if (question[i].checked) {
+  choice=question[i].value;
+  }
+  }
+  if (choice=="MERCURY") {one++;}
+  if (choice=="VENUS") {two++;}
+  if (choice=="EARTH") {three++;}
+  if (choice=="MARS") {four++;}
+  if (choice=="JUPITER") {five++;}
+  if (choice=="SATURN") {six++;}
+  if (choice=="URANUS") {seven++;}
+  if (choice=="NEPTUN") {eight++;}
+ } 
+ alert(one);
+ } 
+</script>

@@ -29,7 +29,8 @@ def login():
         user = db_sess.query(User).filter(User.email == form.email.data).first()
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
-            return redirect("/")
+            id = user.id
+            return redirect(f"/users_page/{id}")
         return render_template('login.html',
                                message="Неправильный логин или пароль",
                                form=form)
@@ -65,6 +66,11 @@ def reqister():
 @app.route('/users_page/<id>')
 def users_page(id):
     return render_template('users_page.html', id=id, avatar='ava.png', planet='mercury.jfif')
+
+
+@app.route('/organize_a_mission/<ids>')
+def organize_a_mission(ids):
+    return render_template('create_mission.html', id=ids)
 
 
 if __name__ == '__main__':

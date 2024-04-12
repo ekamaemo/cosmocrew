@@ -1,23 +1,6 @@
 body{
     margin: 0;
 }
-header{
-    height: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 50px;
-    box-sizing: border-box;
-    position: relative;
-    z-index: 10;
-}
-header ul{
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    display: flex;
-    gap: 30px;
-}
 .root{
     --width-circle: 150vw;
     --radius: calc(100vw / 6);
@@ -27,9 +10,9 @@ header ul{
     height: 100vh;
     overflow: hidden;
     position: relative;
+    z-index: 1;
     background-color: #17232A;
     background-image: radial-gradient(#fff3, transparent 50%);
-    margin-top: -50px;
 }
 .slider .list{
     position: absolute;
@@ -45,17 +28,16 @@ header ul{
     text-align: center;
     transition: transform 1s;
 }
-.slider .list .item.active{
-    transform: rotate(0deg);
-    z-index: 32;
-}
 .slider .list .item img{
-    width: 90%;
+    width: 88%;
     filter: drop-shadow(0 0 20px #000);
 }
 .slider .list .item:nth-child(2){
-    width: 15%;
     z-index: 31;
+}
+.slider .list .item:nth-child(2) img{
+    width: 490px;
+    height: 490px;
 }
 .slider .content{
     z-index: 32;
@@ -87,15 +69,6 @@ header ul{
     text-transform: uppercase;
     transform: translateY(20px);
 }
-.slider .content button{
-    border: 1px solid #eee5;
-    background: transparent;
-    color: #eee;
-    letter-spacing: 5px;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-}
 #prev,
 #next{
     position: absolute;
@@ -119,10 +92,74 @@ header ul{
 }
 
 .circle{
-    pointer-events:none;
+    pointer-events: none;
     position: absolute;
     width: 100%;
     height: 100%;
     z-index: 30;
     backdrop-filter: blur(10px);
 }
+.slider .list .item button{
+    visibility: hidden;
+}
+.slider .list .item:nth-child(2) button{
+    position: absolute;
+    z-index: 1000;
+    top: 45%;
+    left: 14%;
+    visibility: visible;
+    border: 1px solid #eee5;
+    background: transparent;
+    color: #eee;
+    letter-spacing: 5px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border-width: 5px;
+    width: 8%;
+    height: 6%;
+    cursor: pointer;
+}
+.slider .list .item:nth-child(2) button:hover{
+    background: rgb(255, 255, 255, 40);
+    color: #000;
+    border-color: #000;
+}
+.slider .list .item:nth-child(2) h3{
+    position: absolute;
+    z-index: 100;
+    top: -2%;
+    text-align: center;
+    color: #eee;
+    width: max-content;
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 7px;
+    font-weight: bold;
+}
+.sidebar-footer{
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    color: #eee;
+    z-index: 10000;
+    margin-top: -45%;
+    margin-left: 93%;
+}
+.sidebar-link i{
+    position: relative;
+    z-index: 1001;
+    font-size: 3rem;
+    margin-right: 0.75rem;
+}
+.sidebar-link {
+    position: relative;
+    z-index: 1000;
+    display: block;
+    padding: 0.6rem 1.6rem;
+    color: #fff;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    border-left: 3px solid transparent;
+}
+
+

@@ -73,5 +73,10 @@ def organize_a_mission(ids):
     return render_template('create_mission.html', id=ids)
 
 
+@app.route('/mission/<id>')
+def mission(id):
+    return render_template('mission.html', time_mission=id)
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1', debug=True)

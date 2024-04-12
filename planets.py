@@ -11,8 +11,10 @@ class Planets(base, SerializerMixin):
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
     planet_name = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    planet_image = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     planet_id_users = relationship("Users", back_populates="users")
     planet_id_news = relationship("News", back_populates="news")
 
-    def __init__(self, planet_name):
+    def __init__(self, planet_name, planet_img):
         self.planet_name = planet_name
+        self.planet_image = planet_img

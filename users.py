@@ -14,6 +14,7 @@ class Users(base, SerializerMixin, UserMixin):
     username = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     email = sqlalchemy.Column(sqlalchemy.String,
                               index=True, unique=True, nullable=True)
+    end_date = sqlalchemy.Column(sqlalchemy.DateTime, nullable=True)
     hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     planet_id = sqlalchemy.Column(sqlalchemy.Integer,
                                   sqlalchemy.ForeignKey("planets.id"))
@@ -24,6 +25,7 @@ class Users(base, SerializerMixin, UserMixin):
         self.email = email
         self.hashed_password = password
         self.planet_id = planet_id
+        self.end_date = None
 
     def set_password(self, password):
         self.hashed_password = generate_password_hash(password)

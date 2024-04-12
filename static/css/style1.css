@@ -6,7 +6,7 @@ body{
 }
 
 .carousel{
-autoplay: True 7s;
+autoplay: True;
 width: 100vw;
 height: 100vh;
 overflow: hidden;

@@ -1,8 +1,10 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, request
 from forms.register_form import RegisterForm
 from forms.login_form import LoginForm
 from create_database import create_database
 from users import Users as User
+from planets import Planets
+from datetime import datetime, timedelta
 from flask_login import LoginManager, login_user
 app = Flask(__name__, template_folder='templates')
 login_manager = LoginManager()
@@ -53,7 +55,7 @@ def reqister():
         user = User(
             name=form.name.data,
             password=form.password.data,
-            planet_id=0,
+            planet_id=1,
             email=form.email.data,
         )
         user.set_password(form.password.data)
@@ -65,11 +67,30 @@ def reqister():
 
 @app.route('/users_page/<id>')
 def users_page(id):
-    return render_template('users_page.html', id=id, avatar='ava.png', planet='mercury.jfif')
+    id = int(id)
+    db = create_database(load_fake_data=False)
+    user = db.query(User).get(id)
+    planet_id = user.planet_id
+    planet = db.query(Planets).get(planet_id)
+    planet_img = planet.planet_image
+    return render_template('users_page.html', id=id, avatar='ava.png', planet=planet_img)
 
 
-@app.route('/organize_a_mission/<ids>')
+@app.route('/organize_a_mission/<ids>', methods=['POST', 'GET'])
 def organize_a_mission(ids):
+    ids = int(ids)
+    if request.method == 'POST':
+        if 'submit' in request.form:
+            form = request.form
+            db_sess = create_database(load_fake_data=False)
+            user_id = ids
+            planet_id = form.get('planet_id')
+            planet_id = int(planet_id)
+            user = db_sess.query(User).get(user_id)
+            user.planet_id = planet_id
+            user.end_date = datetime.now() + timedelta(hours=3)
+            db_sess.commit()
+            return redirect(f"/users_page/{user_id}")
     return render_template('create_mission.html', id=ids)
 
 

@@ -25,15 +25,4 @@ function showSlider(type){
         listItemDom.prepend(itemSlider[positionLastItem]);
         carouselDom.classList.add('prev');
     }
-
-    clearTimeout(runTimeOut);
-    runTimeOut = setTimeout(() => {
-        carouselDom.classList.remove('next');
-        carouselDom.classList.remove('prev');
-    }, timeRunning);
-
-    clearTimeout(runAutoRun);
-    runAutoRun = setTimeout(()=>{
-        nextDom.click();
-    }, timeAutoNext);
 }

@@ -12,10 +12,13 @@ def create_database(load_fake_data: bool = True):
 
 
 def _load_fake_data(session: session):
-    planet = Planets('Меркурий')
-    session.add(planet)
-    new = News('Great', 'Very big planet', 'img/op.jog', 1)
-    session.add(new)
+    planets = [['Меркурий', 'mercury.jfif'], ['Венера', 'венера.jpeg'],
+               ['Земля', 'земля.jpeg'], ['Марс', 'марс.jpeg'],
+               ['Юпитер', 'юпитер.jpeg'], ['Сатурн', 'сатурн.jpeg'],
+               ['Уран', 'уран.jpeg'], ['Нептун', 'нептун.jpeg']]
+    for planet in planets:
+        planet = Planets(planet[0], planet[1])
+        session.add(planet)
     session.commit()
     session.close()
     return session

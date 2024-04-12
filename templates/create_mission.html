@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Создание миссии</title>
     <link rel="stylesheet" href="/static/css/style3.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
@@ -11,43 +13,123 @@
         <div class="list">
             <div class="item">
                 <img src="/static/img/planet1.png">
-                <button onclick="document.location='/users_page/{{id}}'" id="1">GO!</button>
+                <button onclick="window.modal_id1.showModal()" id="1">GO!</button>
                 <h3>MERCURY</h3>
+                <dialog aria-label="Confirmation dialog" id="modal_id1">
+                    <form>
+                        <p>Вы уверены, что хотите переселиться на Меркурий?</p>
+                        <button class="close-button" onclick="window.modal_id1.close()">
+                            <i class='bx bx-x'></i>
+                        </button>
+                        <input type="text" name="planet_id" readonly value=1>
+                        <button type="submit" name="submit" class="confirm-button" formmethod="post">Переселиться</button>
+                    </form>
+                </dialog>
             </div>
             <div class="item">
                 <img src="/static/img/planet2.png">
-                <button onclick="document.location='/users_page/{{id}}'" id="2">GO!</button>
+                <button onclick="window.modal_id2.showModal()" id="2">GO!</button>
                 <h3>VENUS</h3>
+                <dialog aria-label="Confirmation dialog" id="modal_id2">
+                    <form>
+                        <p>Вы уверены, что хотите переселиться на Венеру?</p>
+                        <button class="close-button" onclick="window.modal_id2.close()">
+                            <i class='bx bx-x'></i>
+                        </button>
+                        <input type="text" name="planet_id" readonly value=2>
+                        <button type="submit" name="submit" class="confirm-button" formmethod="post">Переселиться</button>
+                    </form>
+                </dialog>
             </div>
             <div class="item">
                 <img src="/static/img/planet3.png">
-                <button onclick="document.location='/users_page/{{id}}'" id="3">GO!</button>
+                <button onclick="window.modal_id3.showModal()" id="3">GO!</button>
                 <h3>EARTH</h3>
+                <dialog aria-label="Confirmation dialog" id="modal_id3">
+                    <form>
+                        <p>Вы уверены, что хотите переселиться на Землю?</p>
+                        <button class="close-button" onclick="window.modal_id3.close()">
+                            <i class='bx bx-x'></i>
+                        </button>
+                        <input type="text" name="planet_id" readonly value=3>
+                        <button type="submit" name="submit" class="confirm-button" formmethod="post">Переселиться</button>
+                    </form>
+                </dialog>
             </div>
             <div class="item">
                 <img src="/static/img/planet4.png">
-                <button onclick="document.location='/users_page/{{id}}'" id="4">GO!</button>
+                <button onclick="window.modal_id4.showModal()" id="4">GO!</button>
                 <h3>MARS</h3>
+                <dialog aria-label="Confirmation dialog" id="modal_id4">
+                    <form>
+                        <p>Вы уверены, что хотите переселиться на Марс?</p>
+                        <button class="close-button" onclick="window.modal_id4.close()">
+                            <i class='bx bx-x'></i>
+                        </button>
+                        <input type="text" name="planet_id" readonly value=4>
+                        <button type="submit" name="submit" class="confirm-button" formmethod="post">Переселиться</button>
+                    </form>
+                </dialog>
             </div>
             <div class="item">
                 <img src="/static/img/planet5.png">
-                <button onclick="document.location='/users_page/{{id}}'" id="5">GO!</button>
+                <button onclick="window.modal_id5.showModal()" id="5">GO!</button>
                 <h3>JUPITER</h3>
+                <dialog aria-label="Confirmation dialog" id="modal_id5">
+                    <form>
+                        <p>Вы уверены, что хотите переселиться на Юпитер?</p>
+                        <button class="close-button" onclick="window.modal_id5.close()">
+                            <i class='bx bx-x'></i>
+                        </button>
+                        <input type="text" name="planet_id" readonly value=5>
+                        <button type="submit" class="confirm-button" name="submit" formmethod="post">Переселиться</button>
+                    </form>
+                </dialog>
             </div>
             <div class="item">
                 <img src="/static/img/planet6.png">
-                <button onclick="document.location='/users_page/{{id}}'" id="6">GO!</button>
+                <button onclick="window.modal_id6.showModal()" id="6">GO!</button>
                 <h3>SATURN</h3>
+                <dialog aria-label="Confirmation dialog" id="modal_id6">
+                    <form>
+                        <p>Вы уверены, что хотите переселиться на Сатурн?</p>
+                        <button class="close-button" onclick="window.modal_id6.close()">
+                            <i class='bx bx-x'></i>
+                        </button>
+                        <input type="text" name="planet_id" readonly value=6>
+                        <button type="submit" class="confirm-button" name="submit" formmethod="post">Переселиться</button>
+                    </form>
+                </dialog>
             </div>
             <div class="item">
                 <img src="/static/img/planet7.png">
-                <button onclick="document.location='/users_page/{{id}}'" id="7">GO!</button>
+                <button onclick="window.modal_id7.showModal()" id="7">GO!</button>
                 <h3>URANUS</h3>
+                <dialog aria-label="Confirmation dialog" id="modal_id7">
+                    <form>
+                        <p>Вы уверены, что хотите переселиться на Уран?</p>
+                        <button class="close-button" onclick="window.modal_id7.close()">
+                            <i class='bx bx-x'></i>
+                        </button>
+                        <input type="text" name="planet_id" readonly value=7>
+                        <button type="submit" class="confirm-button" name="submit" formmethod="post">Переселиться</button>
+                    </form>
+                </dialog>
             </div>
             <div class="item">
                 <img src="/static/img/planet8.png">
-                <button onclick="document.location='/users_page/{{id}}'" id="8">GO!</button>
+                <button onclick="window.modal_id8.showModal()" id="8">GO!</button>
                 <h3>NEPTUNE</h3>
+                <dialog aria-label="Confirmation dialog" id="modal_id8">
+                    <form>
+                        <p>Вы уверены, что хотите переселиться на Нептун?</p>
+                        <button class="close-button" onclick="window.modal_id8.close()">
+                            <i class='bx bx-x'></i>
+                        </button>
+                        <input type="text" name="planet_id" readonly value=8>
+                        <button type="submit" class="confirm-button" name="submit" formmethod="post">Переселиться</button>
+                    </form>
+                </dialog>
             </div>
         </div>
         <div class="circle"></div>

@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be14eced-a89e-444f-94c3-28c4af6db55c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../cosmocrew.db" beforeDir="false" afterPath="$PROJECT_DIR$/../cosmocrew.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../static/css/style3.css" beforeDir="false" afterPath="$PROJECT_DIR$/../static/css/style3.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../news.py" beforeDir="false" afterPath="$PROJECT_DIR$/../news.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../static/css/style2.css" beforeDir="false" afterPath="$PROJECT_DIR$/../static/css/style2.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/users_page.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

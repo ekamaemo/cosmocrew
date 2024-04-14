@@ -93,11 +93,72 @@ li{
 }
 .container{
     position: absolute;
+    box-sizing: border-box;
     z-index: 1001;
     border-radius: 60px;
-    background-color: #ffffff;
+    background-color: #fff;
     margin-left: 20%;
     margin-top: 20%;
     width: 80%;
     height: 100%;
-    }
+    display: grid;
+    grid-gap: 20%;
+    justify-items: center;
+}
+.container .sub-container{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -10%;
+    border: 3px solid #423fd4;
+    border-radius: 5%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.container .sub-container .container-content:hover,
+.container .sub-container .container-img:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: opacity 0.5s ease;
+}
+.container .sub-container .container-img{
+    position: relative;
+    width: 60%;
+    border-radius: 5%;
+    border: 5px solid #e8e8e8;
+    left: 5%;
+}
+.container .sub-container .container-img img{
+    width: 100%;
+    object-fit: cover;
+    overflow: hidden;
+}
+.container .sub-container .container-img p{
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-weight: bold;
+    position: relative;
+}
+.container .sub-container .container-content{
+    position: relative;
+    width: 30%;
+    height: 100%;
+    left: 7%;
+    border-radius: 8%;
+    padding: 5px 5px 5px 5px;
+    border: 5px solid #e8e8e8;
+}
+.container .sub-container .container-content p.author{
+    font-size: 1.5rem;
+    color: #a8dbff;
+}
+.container .sub-container .container-content p.description{
+    font-size: 1.2rem;
+}
+.container .sub-container .container-content p.date{
+    text-align: center;
+    font-size: 1.1rem;
+    position: absolute;
+    bottom: 0;
+    right: 15px;
+    color: #94c1e0;
+}

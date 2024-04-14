@@ -22,13 +22,13 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="/not_now" class="sidebar-link">
                         <i class='bx bx-history'></i>
                         <span>Missions</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="/not_now" class="sidebar-link">
                         <i class='bx bxs-bar-chart-alt-2'></i>
                         <span>Chart</span>
                     </a>
@@ -49,7 +49,20 @@
         </aside>
     </div>
     <div class="container">
+        <h1>Новости с планеты {{planet_name}}</h1>
+        {% for new in news %}
+        <div class="sub-container">
+            <div class="container-img">
+                <p>{{new.author}}</p>
+                <img src="/static/img/{{new.url_source}}">
+            </div>
+            <div class="container-content">
+                <p class="author">Автор: {{new.title}}</p>
+                <p class="description">Описание: {{new.content}}</p>
+                <p class="date">{{new.url_source.split('.')[0]}}</p>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-<script src="/static/js/up.js" type="text/javascript"></script>
 </body>
 </html>

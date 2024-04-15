@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/css/style4.css">
+    <form name="quiz" class="quiz" id="quiz">
+        <h2>Тест: Полёт на планету</h2>
+        <div id="quiz1" class="quiz-item">
+            <h3> Как вы хотите добираться до своей планеты? </h3>
+            <input name="vopros1" value="MERCURY" type="radio" required> Надену скафандр и дойду <br>
+            <input name="vopros1" value="EARTH" type="radio"> Пешком <br>
+            <input name="vopros1" value="URANUS" type="radio"> На космическом корабле <br>
+            <input name="vopros1" value="NEPTUN" type="radio"> Телепортацией <br>
+        </div>
+        <div id="quiz2" class="quiz-item">
+            <h3> В какое время года вы родились? </h3>
+            <input name="vopros2" value="NEPTUN" type="radio" required> Зима <br>
+            <input name="vopros2" value="MARS" type="radio"> Весна <br>
+            <input name="vopros2" value="VENUS" type="radio"> Лето <br>
+            <input name="vopros2" value="JUPITER" type="radio"> Осень <br>
+        </div>
+        <div id="quiz3" class="quiz-item">
+            <h3> Какая погода вам больше всего нравится? </h3>
+            <input name="vopros3" value="VENUS" type="radio" required> Солнечная и ветреная <br>
+            <input name="vopros3" value="EARTH" type="radio"> Прохладная и дождливая <br>
+            <input name="vopros3" value="URANUS" type="radio"> Морозная <br>
+            <input name="vopros3" value="MERCURY" type="radio"> Жаркая и безветренная <br>
+        </div>
+        <div id="quiz4" class="quiz-item">
+            <h3> Сколько видов животных имеется на вашей планете? </h3>
+            <input name="vopros4" value="NEPTUN" type="radio" required> 1 <br>
+            <input name="vopros4" value="SATURN" type="radio"> 10 <br>
+            <input name="vopros4" value="MARS" type="radio"> 100000000 <br>
+            <input name="vopros4" value="EARTH" type="radio"> 10000000000000000000000 <br>
+        </div>
+        <div id="quiz5" class="quiz-item">
+            <h3> Какое первое действие вы совершите на вашей планете? </h3>
+            <input name="vopros5" value="JUPITER" id="value1" type="radio" required> Прыгну <br>
+            <input name="vopros5" value="URANUS" id="value2" type="radio"> Побегу <br>
+            <input name="vopros5" value="SATURN" id="value3" type="radio"> Буду стоять и смотреть на небо <br>
+            <input name="vopros5" value="MARS" id="value4" type="radio"> Покушаю, а потом погуляю <br>
+        </div>
+        <br>
+         <button type="submit" class="btn" name="submit" action="javascript:check();" formmethod="post" id="submit">Завершить</button>
+         <input type="text" name="planet_id" readonly value=0 id="planet_id" class="hide">
+    </form>
+    <script>
+        document.getElementById('submit').onclick = function check()
+         {
+         var pl_id=0;
+         var one=0;
+         var two=0;
+         var three=0;
+         var four=0;
+         var five=0;
+         var six=0;
+         var seven=0;
+         var eight=0;
+         var result="";
+         var choice;
+         for (var v=1; v<=5; v++)
+         {
+         var question = document.forms["quiz"].elements["vopros"+v];
+          for (var i=0; i<question.length; i++)
+          {
+          if (question[i].checked) {
+          choice=question[i].value;
+          }
+          }
+          if (choice=="MERCURY") {one++;}
+          if (choice=="VENUS") {two++;}
+          if (choice=="EARTH") {three++;}
+          if (choice=="MARS") {four++;}
+          if (choice=="JUPITER") {five++;}
+          if (choice=="SATURN") {six++;}
+          if (choice=="URANUS") {seven++;}
+          if (choice=="NEPTUN") {eight++;}
+         }
+         switch (true) {
+         case (one==2): {result="Вам следует полететь на Меркурий";pl_id=1;break;}
+         case (two==2): {result="Вам следует полететь на Венеру";pl_id=2;break;}
+         case (three==2): {result="Вам следует остаться на Земле";pl_id=3;break;}
+         case (four==2): {result="Вам следует полететь на Марс";pl_id=4;break;}
+         case (five==2): {result="Вам следует полететь на Юпитер";pl_id=5;break;}
+         case (six==2): {result="Вам следует полететь на Сатурн";pl_id=6;break;}
+         case (seven==2): {result="Вам следует полететь на Уран";pl_id=7;break;}
+         case (eight==2): {result="Вам следует полететь на Нептун";pl_id=8;break;}
+         default: {result="Вам следует остаться на Земле";pl_id=3;break;}
+         }
+         alert(result);
+         document.getElementById("planet_id").value = pl_id;
+         }
+    </script>
+<video autoplay muted loop class="bg-video">
+  <source src="/static/video4.mp4" type="video/mp4">
+</video>
+{% endblock %}

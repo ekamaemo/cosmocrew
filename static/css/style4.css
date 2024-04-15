@@ -1,0 +1,38 @@
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -100;
+}
+.quiz{
+    position: relative;
+    width: 50%;
+    margin-top: -10%;
+    background:#FFFFFF;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius:5%;
+}
+.quiz h2{
+    text-align: center;
+}
+.quiz-item{
+    width:70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.quiz-item h3{
+    font-size: 1rem;
+}
+.quiz-item input.hide{
+    visibility: hidden;
+}
+.btn{
+    position: relative;
+    width: 50%;
+    background-color: #273ae5;
+    margin-left: 25%;
+    color: #fff;
+    margin-right: auto;
+}

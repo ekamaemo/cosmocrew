@@ -87,7 +87,9 @@ def reqister():
         user.set_password(form.password.data)
         db.add(user)
         db.commit()
-        return redirect('/login')
+        user = db.query(User).filter(User.email == form.email.data).first()
+        id = user.id
+        return redirect(f'/test/{id}')
     return render_template('register.html', title='Регистрация', form=form)
 
 
@@ -135,6 +137,25 @@ def organize_a_mission(ids):
 @app.route('/not_now')
 def not_now():
     return render_template('no_page.html')
+
+
+@app.route('/test/<id>', methods=['GET', 'POST'])
+def test(id):
+    if request.method == 'POST':
+        print(1)
+        if 'submit' in request.form:
+            planet_id = request.form.get('planet_id')
+            db = create_database(load_fake_data=False)
+            user = db.query(User).get(int(id))
+            user.planet_id = planet_id
+            db.commit()
+            return redirect(f'/users_page/{id}')
+    return render_template('test.html')
+
+
+@app.route('/quiz')
+def quiz():
+    return render_template('викторина.html')
 
 
 def get_data_from_nasa_api():

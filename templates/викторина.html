@@ -1,0 +1,60 @@
+<style>
+    #test div {
+	    margin-bottom: 30px;
+	}
+	.right{
+	    border: 2px solid green;
+	}
+	.wrong{
+	    border: 2px solid red;
+	}
+</style>
+<div id="test">
+    <div>
+        <p>Четвёртая планета от Солнца?</p>
+	    <input data-right="Марс">
+    </div>
+	<div>
+        <p>Какая планета Солнечной системы имеет плотность меньшую, чем плотность воды?</p>
+	    <input data-right="Сатурн">
+    </div>
+    <div>
+        <p>Какая планета была убрана из Солнечной системы из-за своего размера?</p>
+	    <input data-right="Плутон">
+    </div>
+    <div>
+        <p>Самая холодная планета Солнечной системы?</p>
+	    <input data-right="Уран">
+    </div>
+    <div>
+        <p>Тритон - это спутник какой планеты Солнечной системы?</p>
+	    <input data-right="Нептун">
+    </div>
+    <div>
+        <p>Как называется галактика, в которую входит Солнечная система?</p>
+	    <input data-right="Млечный Путь">
+    </div>
+    <div>
+        <p>Какая планета Солнечной системы имеет самую большую массу?</p>
+	    <input data-right="Юпитер">
+    </div>
+    <div>
+        <p>Какая планета Солнечной системы названа в честь римской богини любви и красоты?</p>
+	    <input data-right="Венера">
+    </div>
+    <button action="action" onclick="window.history.go(-1); return false;" id="button">Вернуться на сайт</button>
+</div>
+<script>
+    let inputs = document.querySelectorAll('#test input');
+	for (let input of inputs) {
+		input.addEventListener('blur', function() {
+		    this.classList.remove('right');
+			this.classList.remove('wrong');
+		    if (this.value == this.dataset.right) {
+			    this.classList.add('right');
+			} else {
+			    this.classList.add('wrong');
+			}
+		});
+	}
+</script>

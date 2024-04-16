@@ -1,41 +1,52 @@
-from flask import Flask, render_template, redirect, request, Response
+from flask import Flask, render_template, redirect, request
 from forms.register_form import RegisterForm
 from forms.login_form import LoginForm
 from create_database import create_database
 from users import Users as User
+import schedule
 from planets import Planets
 from news import News
 from datetime import datetime, timedelta
 from flask_login import LoginManager, login_user
 import apod_object_parser
-import time
 import requests
+import os
+import time
 from translater import translate_text
 app = Flask(__name__, template_folder='templates')
 login_manager = LoginManager()
 login_manager.init_app(app)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+UPLOAD_FOLDER = 'static/img/avatars'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 def news_add_new(response):
-    des = response['explanation']
-    title = response['title']
-    date = response['date']
-    if 'copyright' in response:
-        author = response['copyright']
-    else:
-        author = None
-    planets = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune']
-    planet_id = 3
     db = create_database(load_fake_data=False)
-    for i in range(8):
-        if planets[i] in title.lower():
-            planet_id = i + 1
-            des = translate_text(des)
-            title = translate_text(title)
-            new = News(author, title, des, f'{date}.jpg', planet_id)
-            db.add(new)
-    db.commit()
+    if not db.query(News).filter(News.author == response['title']).first():
+        des = response['explanation']
+        title = response['title']
+        date = response['date']
+        if 'copyright' in response:
+            author = response['copyright']
+        else:
+            author = None
+        planets = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune']
+        db = create_database(load_fake_data=False)
+        for i in range(8):
+            if planets[i] in title.lower():
+                planet_id = i + 1
+                des = translate_text(des)
+                title = translate_text(title)
+                new = News(author, title, des, f'{date}.jpg', planet_id)
+                db.add(new)
+        db.commit()
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @login_manager.user_loader
@@ -93,11 +104,22 @@ def reqister():
     return render_template('register.html', title='Регистрация', form=form)
 
 
-@app.route('/users_page/<id>')
+@app.route('/users_page/<id>', methods=['GET', 'POST'])
 def users_page(id):
     id = int(id)
+    if request.method == 'POST':
+        print(1)
+        if 'file' not in request.files:
+            return redirect(request.url)
+        file = request.files['file']
+        print(2)
+        if file.filename == '':
+            print(3)
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            print(2)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], f'{id}.png'))
     # обновляем базу данных
-    get_data_from_nasa_api()
     db = create_database(load_fake_data=False)
     user = db.query(User).get(id)
     planet_id = user.planet_id
@@ -112,7 +134,12 @@ def users_page(id):
     pl_news = sorted(pl_news, key=lambda x: x.url_source, reverse=True)
     planet_img = planet.planet_image
     planet_name = planet.planet_name
-    return render_template('users_page.html', id=id, avatar='ava.png', planet=planet_img, news=pl_news,
+    if os.path.exists(f'static/img/avatars/{id}.png'):
+        return render_template('users_page.html', id=id, avatar=f'{id}.png',
+                               planet=planet_img, news=pl_news,
+                               planet_name=planet_name)
+    return render_template('users_page.html', id=id, avatar='ava.png',
+                           planet=planet_img, news=pl_news,
                            planet_name=planet_name)
 
 
@@ -168,6 +195,20 @@ def get_data_from_nasa_api():
         apod_object_parser.download_image(url, date)
         news_add_new(response)
 
+
+schedule.every(24).hours.do(get_data_from_nasa_api)
+
+
+# Функция для запуска проверки расписания
+def run_schedule():
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
+
+import threading
+thread = threading.Thread(target=run_schedule)
+thread.start()
 
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1', debug=True)

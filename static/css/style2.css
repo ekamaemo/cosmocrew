@@ -31,7 +31,7 @@ li{
 }
 .toggle-btn i{
     position: absolute;
-    margin-top: -260px;
+    margin-top: -280px;
     margin-left: -10px;
     font-size: 3rem;
     color: #fff;
@@ -39,7 +39,7 @@ li{
 .sidebar .sidebar-logo{
     position: relative;
     z-index: 1000;
-    margin-top: -280px;
+    margin-top: -300px;
     margin-left: 100px;
 }
 .sidebar-logo a{
@@ -76,14 +76,21 @@ li{
 .sidebar .sidebar-footer{
     margin-bottom: 1.5rem;
 }
-.avatar {
+.sidebar .avatar {
     vertical-align: middle;
+    justify-content: center;
     width: 200px;
     height: 200px;
+    overflow: hidden;
     border-radius: 50%;
-    margin-left: 30px;
+    margin-left: 50px;
     margin-top: 40px;
+    object-fit: cover;
 }
+.sidebar form input{
+    display: none;
+}
+
 .background{
     position: absolute;
     z-index: 1;

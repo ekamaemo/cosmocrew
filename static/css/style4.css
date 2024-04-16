@@ -25,8 +25,8 @@
 .quiz-item h3{
     font-size: 1rem;
 }
-.quiz-item input.hide{
-    visibility: hidden;
+input.hide{
+    display: none;
 }
 .btn{
     position: relative;

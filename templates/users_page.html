@@ -11,7 +11,11 @@
     <img src="/static/img/{{planet}}" class="background" />
     <div class="wrapper">
         <aside class="sidebar">
-            <img src="/static/img/{{avatar}}" alt="Avatar" class="avatar">
+            <img src="/static/img/avatars/{{avatar}}" alt="Avatar" class="avatar" onclick="document.getElementById('fileInput').click()">
+            <form method="post" enctype=multipart/form-data id="myForm">
+                <input type=file name=file value="Сменить аватар" id="fileInput">
+                <input type="submit" id="submitButton">
+            </form>
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
                     <i class='bx bx-menu'></i>
@@ -70,5 +74,10 @@
         </div>
         {% endfor %}
     </div>
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function() {
+            document.getElementById('submitButton').click();
+        });
+    </script>
 </body>
 </html>

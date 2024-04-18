@@ -108,16 +108,12 @@ def reqister():
 def users_page(id):
     id = int(id)
     if request.method == 'POST':
-        print(1)
         if 'file' not in request.files:
             return redirect(request.url)
         file = request.files['file']
-        print(2)
         if file.filename == '':
-            print(3)
             return redirect(request.url)
         if file and allowed_file(file.filename):
-            print(2)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], f'{id}.png'))
     # обновляем базу данных
     db = create_database(load_fake_data=False)
@@ -169,7 +165,6 @@ def not_now():
 @app.route('/test/<id>', methods=['GET', 'POST'])
 def test(id):
     if request.method == 'POST':
-        print(1)
         if 'submit' in request.form:
             planet_id = request.form.get('planet_id')
             db = create_database(load_fake_data=False)

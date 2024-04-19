@@ -22,8 +22,9 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
-def news_add_new(response):
+def news_add_new(response):  # обновление новостей из картинок дня Nasa
     db = create_database(load_fake_data=False)
+    # при заполнении базы данных были перепутаны колонки title и author
     if not db.query(News).filter(News.author == response['title']).first():
         des = response['explanation']
         title = response['title']
@@ -44,6 +45,7 @@ def news_add_new(response):
         db.commit()
 
 
+# проверка на то, что файл аватарки правильного формата
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -107,7 +109,7 @@ def reqister():
 @app.route('/users_page/<id>', methods=['GET', 'POST'])
 def users_page(id):
     id = int(id)
-    if request.method == 'POST':
+    if request.method == 'POST':  # смена аватарки у пользователя
         if 'file' not in request.files:
             return redirect(request.url)
         file = request.files['file']
@@ -115,7 +117,7 @@ def users_page(id):
             return redirect(request.url)
         if file and allowed_file(file.filename):
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], f'{id}.png'))
-    # обновляем базу данных
+    # загрузка новостей для планеты пользователя
     db = create_database(load_fake_data=False)
     user = db.query(User).get(id)
     planet_id = user.planet_id
@@ -123,17 +125,21 @@ def users_page(id):
     planet_news = db.query(News).filter(News.planet_id == planet_id)
     pl_news = []
     dates = []
+    # проверка, чтобы не было повторяющихся новостей в ленте
     for i in planet_news:
         if i.url_source not in dates:
             pl_news.append(i)
             dates.append(i.url_source)
+    # сортировка новостей по дате, чтобы свежие новости были в топе
     pl_news = sorted(pl_news, key=lambda x: x.url_source, reverse=True)
     planet_img = planet.planet_image
     planet_name = planet.planet_name
+    # проверка на наличие аватарки у пользователя
     if os.path.exists(f'static/img/avatars/{id}.png'):
         return render_template('users_page.html', id=id, avatar=f'{id}.png',
                                planet=planet_img, news=pl_news,
                                planet_name=planet_name)
+    # если её нет, то на аватарке стоит дефолтная картинка
     return render_template('users_page.html', id=id, avatar='ava.png',
                            planet=planet_img, news=pl_news,
                            planet_name=planet_name)
@@ -142,6 +148,7 @@ def users_page(id):
 @app.route('/organize_a_mission/<ids>', methods=['POST', 'GET'])
 def organize_a_mission(ids):
     ids = int(ids)
+    # организация перелётов
     if request.method == 'POST':
         if 'submit' in request.form:
             form = request.form
@@ -151,7 +158,7 @@ def organize_a_mission(ids):
             planet_id = int(planet_id)
             user = db_sess.query(User).get(user_id)
             user.planet_id = planet_id
-            user.end_date = datetime.now() + timedelta(hours=3)
+            user.end_date = datetime.now() + timedelta(hours=3)  # недоделанная функция таймера на полёт
             db_sess.commit()
             return redirect(f"/users_page/{user_id}")
     return render_template('create_mission.html', id=ids)
@@ -159,6 +166,7 @@ def organize_a_mission(ids):
 
 @app.route('/not_now')
 def not_now():
+    # страница в разработке
     return render_template('no_page.html')
 
 
@@ -166,6 +174,7 @@ def not_now():
 def test(id):
     if request.method == 'POST':
         if 'submit' in request.form:
+            # прохождение теста и присуждение планеты пользователю
             planet_id = request.form.get('planet_id')
             db = create_database(load_fake_data=False)
             user = db.query(User).get(int(id))
@@ -187,11 +196,11 @@ def get_data_from_nasa_api():
     if 'hdurl' in response:
         url = response['hdurl']
         date = str(datetime.now()).split()[0]
-        apod_object_parser.download_image(url, date)
+        apod_object_parser.download_image(url, date)  # загрузка картинки новости по ссылке
         news_add_new(response)
 
 
-schedule.every(24).hours.do(get_data_from_nasa_api)
+schedule.every(24).hours.do(get_data_from_nasa_api)  # ограничение на запросы к NASA API каждый день
 
 
 # Функция для запуска проверки расписания
@@ -201,7 +210,7 @@ def run_schedule():
         time.sleep(1)
 
 
-import threading
+import threading  # импорт здесь специально, чтобы таймер на обновление новостей и сам сайт работали одновременно
 thread = threading.Thread(target=run_schedule)
 thread.start()
 
